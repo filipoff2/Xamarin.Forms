@@ -352,6 +352,9 @@ namespace Xamarin.Forms.Platform.UWP
 
 		void SetCurrentItem(int carouselPosition)
 		{
+			if (ListViewBase.Items.Count == 0)
+				return;
+
 			if (carouselPosition < 0 && carouselPosition > ListViewBase.Items.Count)
 				return;
 
