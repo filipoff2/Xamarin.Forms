@@ -322,10 +322,10 @@ namespace Xamarin.Forms.Platform.UWP
 
 		void UpdatePosition(int position)
 		{
-			var carouselPosition = Carousel.Position;
-
-			if (position < 0 || position >= ListViewBase.Items.Count)
+			if (!ValidatePosition(position))
 				return;
+
+			var carouselPosition = Carousel.Position;
 
 			//we arrived center
 			if (position == _gotoPosition)
@@ -337,10 +337,7 @@ namespace Xamarin.Forms.Platform.UWP
 
 		void SetCurrentItem(int carouselPosition)
 		{
-			if (ListViewBase.Items.Count == 0)
-				return;
-
-			if (carouselPosition < 0 && carouselPosition >= ListViewBase.Items.Count)
+			if (!ValidatePosition(carouselPosition))
 				return;
 
 			if (!(ListViewBase.Items[carouselPosition] is ItemTemplateContext itemTemplateContext))
@@ -348,6 +345,17 @@ namespace Xamarin.Forms.Platform.UWP
 
 			var item = itemTemplateContext.Item;
 			Carousel.SetValueFromRenderer(CarouselView.CurrentItemProperty, item);
+		}
+
+		bool ValidatePosition(int position)
+		{
+			if (ListViewBase.Items.Count == 0)
+				return false;
+
+			if (position < 0 || position >= ListViewBase.Items.Count)
+				return false;
+
+			return true;
 		}
 
 		ListViewBase CreateCarouselListLayout(ItemsLayoutOrientation layoutOrientation)
