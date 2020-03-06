@@ -39,12 +39,14 @@ namespace Xamarin.Forms.Controls.GalleryPages.CollectionViewGalleries.CarouselVi
 			{
 				ItemsLayout = itemsLayout,
 				ItemTemplate = itemTemplate,
-				ItemsSource = viewModel.Items,
 				IsScrollAnimated = true,
 				IsBounceEnabled = true,
 				EmptyView = "This is the empty view",
-				PeekAreaInsets = new Thickness(50)
+				PeekAreaInsets = new Thickness(50),
+				BindingContext = viewModel
 			};
+
+			carouselView.SetBinding(CarouselView.ItemsSourceProperty, nameof(viewModel.Items));
 
 			var absolute = new AbsoluteLayout();
 			absolute.Children.Add(carouselView, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
@@ -193,8 +195,8 @@ namespace Xamarin.Forms.Controls.GalleryPages.CollectionViewGalleries.CarouselVi
 			{
 				Task.Run(async () =>
 				{
-					await Task.Delay(200);
-					Device.BeginInvokeOnMainThread(() => SetSource(empty));
+					await Task.Delay(400);
+					SetSource(empty);
 				});
 			}
 			else
@@ -228,7 +230,7 @@ namespace Xamarin.Forms.Controls.GalleryPages.CollectionViewGalleries.CarouselVi
 			set
 			{
 				_items = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(Items));
 			}
 		}
 	}
