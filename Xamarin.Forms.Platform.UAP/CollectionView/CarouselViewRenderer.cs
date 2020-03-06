@@ -321,17 +321,16 @@ namespace Xamarin.Forms.Platform.UWP
 		void UpdatePosition(int position)
 		{
 			var carouselPosition = Carousel.Position;
-			var newPosition = FixPosition(position);
 
-			if (newPosition < 0 || newPosition >= ListViewBase.Items.Count)
+			if (position < 0 || position >= ListViewBase.Items.Count)
 				return;
 
 			//we arrived center
-			if (newPosition == _gotoPosition)
+			if (position == _gotoPosition)
 				_gotoPosition = -1;
 
-			if (_gotoPosition == -1 && carouselPosition != newPosition)
-				Carousel.SetValueFromRenderer(CarouselView.PositionProperty, newPosition);
+			if (_gotoPosition == -1 && carouselPosition != position)
+				Carousel.SetValueFromRenderer(CarouselView.PositionProperty, position);
 		}
 
 		void SetCurrentItem(int carouselPosition)
@@ -476,7 +475,5 @@ namespace Xamarin.Forms.Platform.UWP
 
 			listView.Loaded += ListViewLoaded;
 		}
-
-		static int FixPosition(int position) => position - 1;
 	}
 }

@@ -64,7 +64,7 @@ namespace Xamarin.Forms.Controls.Issues
 					Items.Add(i.ToString());
 				}
 
-				Position = 100 / 2;
+				//Position = 100 / 2;
 
 				IsLoading = false;
 			});
