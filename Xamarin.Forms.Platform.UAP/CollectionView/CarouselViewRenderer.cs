@@ -340,7 +340,7 @@ namespace Xamarin.Forms.Platform.UWP
 			if (ListViewBase.Items.Count == 0)
 				return;
 
-			if (carouselPosition < 0 && carouselPosition > ListViewBase.Items.Count)
+			if (carouselPosition < 0 && carouselPosition >= ListViewBase.Items.Count)
 				return;
 
 			if (!(ListViewBase.Items[carouselPosition] is ItemTemplateContext itemTemplateContext))
