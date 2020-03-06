@@ -110,9 +110,9 @@ namespace Xamarin.Forms.Platform.UWP
 			var collectionViewSource = TemplatedItemSourceFactory.Create(Element.ItemsSource, Element.ItemTemplate, Element,
 					GetItemHeight(), GetItemWidth(), GetItemSpacing());
 
-			if(collectionViewSource is ObservableItemTemplateCollection observableItemsSource)
+			if (collectionViewSource is ObservableItemTemplateCollection observableItemsSource)
 				observableItemsSource.CollectionChanged += CollectionItemsSourceChanged;
-		
+
 			return new CollectionViewSource
 			{
 				Source = collectionViewSource,
@@ -151,19 +151,19 @@ namespace Xamarin.Forms.Platform.UWP
 			if (removingCurrentElementButNotFirst)
 			{
 				carouselPosition = Carousel.Position - 1;
-			
+
 			}
 			else if (removingFirstElement && !removingCurrentElement)
 			{
 				carouselPosition = currentItemPosition;
 			}
 
-			if(removingCurrentElement)
+			if (removingCurrentElement)
 			{
 				SetCurrentItem(carouselPosition);
 				UpdatePosition(carouselPosition);
 			}
-			
+
 		}
 
 		void OnListSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
@@ -281,6 +281,8 @@ namespace Xamarin.Forms.Platform.UWP
 
 			if (itemCount == 0)
 				return;
+
+			itemCount--;
 
 			int position;
 
